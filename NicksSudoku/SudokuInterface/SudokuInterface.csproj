@@ -52,6 +52,12 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="LogEntryDisplay.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="LogEntryDisplay.Designer.cs">
+      <DependentUpon>LogEntryDisplay.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SudokuCell.cs">
@@ -68,6 +74,9 @@
     </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LogEntryDisplay.resx">
+      <DependentUpon>LogEntryDisplay.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -101,6 +110,10 @@
     <ProjectReference Include="..\SudokuManager\SudokuManager.csproj">
       <Project>{9b0ca684-90c0-4a46-96ba-69aba8796328}</Project>
       <Name>SudokuManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Utils\Utils.csproj">
+      <Project>{cbf59671-6576-41d6-bc48-c22f874e8d72}</Project>
+      <Name>Utils</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -30,7 +30,7 @@ namespace SudokuInterface
                     int XOffset = 5 +((int)i / 3) * 5;
                     int YOffset = 5 +((int)j / 3) * 5;
 
-                    SudokuCell Cell = new SudokuCell(Board.Grid[i, j]);
+                    SudokuCell Cell = new SudokuCell(Board, i, j);
                     Cell.Location = new Point(Cell.Width * i + XOffset, Cell.Height * j + YOffset);
                     
                     Cells[i].Add(Cell);
