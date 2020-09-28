@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Utils
@@ -29,12 +30,12 @@ namespace Utils
         public bool LogLevelChanged { get; set; }
 
     }
-    public class Log
+    public static class Log
     {
         public static List<LogEntry> History = new List<LogEntry>();
         private const Importance DefaultLogLevel = Importance.SomewhatImportant;
         private static Importance DisplayLogLevel = Importance.Important;
-        public static string TextDisplay = "" ;
+        public static string TextDisplay = "";
         public static readonly List<LogEntry> DisplayedLogs = new List<LogEntry>();
         public static event EventHandler LogsChanged;
 
@@ -103,5 +104,9 @@ namespace Utils
             this.OriginalMessage = message;
             this.importance = importance;
         }
+
+    }
+    public static class ListExtensions
+    {
     }
 }
