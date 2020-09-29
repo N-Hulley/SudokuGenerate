@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,7 +8,8 @@ using Utils;
 
 namespace SudokuManager
 {
-    class NumberTracker {
+    class NumberTracker
+    {
         private int[] Values;
         public NumberTracker(int[] values)
         {
@@ -67,10 +69,13 @@ namespace SudokuManager
 
         public Sudoku(int?[,] grid)
         {
+            
+
             Grid = grid;
         }
 
 
+        static Random rand = new Random(1);// unixTimestamp);
 
 
         /// <summary>
@@ -123,21 +128,32 @@ namespace SudokuManager
                         if (grid[i, j] == null) continue;
                     }
                     int index = (i * 3) + j;
-                    
+
                     tracker.addValue(grid[i, j], index);
                     if (!tracker.IsValid) return false;
                 }
             }
             return true;
         }
-        public static bool ValidateRow(int?[,] grid, int row, bool allowNull = false)
+        public static bool ValidateRow(int?[,] grid, int row, bool allowNull = false, bool ignoreBlock = false, int? allowedCol = null)
         {
-            Log.Add("Validating Row " + row , Importance.NotImportant);
+            Log.Add("Validating Row " + row, Importance.NotImportant);
 
             NumberTracker tracker = new NumberTracker();
 
             for (int i = 0; i < Sudoku.Cols; i++)
             {
+                if (ignoreBlock)
+                {
+                    int blockStart = (int)(row / 3) * 3;
+                    int blockEnd = blockStart + 3;
+
+                    if (i != allowedCol && i < blockEnd && i > blockStart)
+                    {
+                        continue;
+                    }
+
+                }
                 if (allowNull)
                 {
                     if (grid[i, row] == null) continue;
@@ -147,7 +163,7 @@ namespace SudokuManager
             }
             return true;
         }
-        public static bool ValidateCol(int?[,] grid, int col, bool allowNull = false)
+        public static bool ValidateCol(int?[,] grid, int col, bool allowNull = false, bool ignoreBlock = false, int? allowedRow = null)
         {
             Log.Add("Validating Col " + col, Importance.NotImportant);
 
@@ -155,6 +171,17 @@ namespace SudokuManager
 
             for (int i = 0; i < Sudoku.Cols; i++)
             {
+                if (ignoreBlock)
+                {
+                    int blockStart = (int)(col / 3) * 3;
+                    int blockEnd = blockStart + 3;
+
+                    if (i != allowedRow && i < blockEnd && i > blockStart)
+                    {
+                        continue;
+                    }
+
+                }
                 if (allowNull)
                 {
                     if (grid[col, i] == null) continue;
@@ -164,7 +191,33 @@ namespace SudokuManager
             }
             return true;
         }
+           
+        public static Sudoku GenerateRandomValidSudoku()
+        {
+            Sudoku board = new Sudoku(GenerateGrid());
 
+            int ColShift = 0;
+
+            List<int> numbers = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+            List<int> randomizedNumbers = ListExtensions<int>.randomize(numbers);
+
+            // For each row
+            for (int row = 0; row < 9; row++)
+            {
+                List<int> shifted = ListExtensions<int>.shift(randomizedNumbers, ColShift);
+                for (int col = 0; col < 9; col++)
+                {
+                    board.Grid[row, col] = shifted[col];
+                } 
+
+
+                ColShift += row % 3 == 2 ? 1 : 3;
+
+            }
+
+
+            return board;
+        }
         public static Sudoku GenerateRandom()
         {
             Log.Add("Generate Random Sudoku", Importance.SomewhatImportant);
@@ -185,54 +238,25 @@ namespace SudokuManager
 
 
 
-            //Int32 unixTimestamp = (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
-            Random rand = new Random(1);// unixTimestamp);
             int RowShift = 0, ColShift = 0;
 
+            // For each 3x3 block
             for (int x = 0; x < 9; x++)
             {
-                List<int> numbers = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 
-                if (RowShift >6)
+                if (RowShift > 6)
                 {
                     RowShift = 0;
                     ColShift += 3;
                 }
 
-                for (int i = RowShift; i < RowShift + 3; i++)
-                {
-                    for (int j = ColShift; j < ColShift + 3; j++)
-                    {
-                        bool numberPlaced = false;
-                        bool noSolution = false;
-                        List<int> testedValues = new List<int>(numbers);
-                        while (!numberPlaced)
-                        {
-                            if (testedValues.Count == 0) { noSolution = true; break; }
 
-                            int selectedIndex = rand.Next(0, testedValues.Count );
-                            int value = testedValues[selectedIndex];
-                            testedValues.RemoveAt(selectedIndex);
-
-                            board.Grid[i, j] = value;
-                            if (ValidateRow(board.Grid, i, true))
-                            {
-                                if (ValidateCol(board.Grid, j, true))
-                                {
-                                    numbers.Remove(value);
-                                    numberPlaced = true;
-                                    break;
-                                }
-                            }
-                        }
-
-                    }
-                }
                 RowShift += 3;
-
             }
+
 
             return board;
         }
+
     }
 }

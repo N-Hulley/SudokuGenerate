@@ -106,7 +106,4 @@ namespace Utils
         }
 
     }
-    public static class ListExtensions
-    {
-    }
 }

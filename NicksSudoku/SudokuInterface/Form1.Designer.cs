@@ -31,14 +31,14 @@
             this.btnGenerate = new System.Windows.Forms.Button();
             this.pnlSudokuPlaceHoldr = new System.Windows.Forms.Panel();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.btnValidate = new System.Windows.Forms.Button();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.lstLogList = new System.Windows.Forms.ListBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
             this.lstLogImportance = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
             this.txtSelectedLogInfo = new System.Windows.Forms.TextBox();
-            this.lstLogList = new System.Windows.Forms.ListBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.btnValidate = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -97,19 +97,6 @@
             this.splitContainer1.SplitterWidth = 8;
             this.splitContainer1.TabIndex = 1;
             // 
-            // btnValidate
-            // 
-            this.btnValidate.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnValidate.Location = new System.Drawing.Point(15, 67);
-            this.btnValidate.Margin = new System.Windows.Forms.Padding(15);
-            this.btnValidate.Name = "btnValidate";
-            this.btnValidate.Padding = new System.Windows.Forms.Padding(15);
-            this.btnValidate.Size = new System.Drawing.Size(182, 52);
-            this.btnValidate.TabIndex = 2;
-            this.btnValidate.Text = "Validate";
-            this.btnValidate.UseVisualStyleBackColor = true;
-            this.btnValidate.Click += new System.EventHandler(this.btnValidate_Click);
-            // 
             // splitContainer2
             // 
             this.splitContainer2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
@@ -134,6 +121,18 @@
             this.splitContainer2.SplitterDistance = 155;
             this.splitContainer2.TabIndex = 4;
             // 
+            // lstLogList
+            // 
+            this.lstLogList.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.lstLogList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lstLogList.ForeColor = System.Drawing.SystemColors.Menu;
+            this.lstLogList.FormattingEnabled = true;
+            this.lstLogList.Location = new System.Drawing.Point(0, 0);
+            this.lstLogList.Name = "lstLogList";
+            this.lstLogList.Size = new System.Drawing.Size(182, 155);
+            this.lstLogList.TabIndex = 10;
+            this.lstLogList.SelectedIndexChanged += new System.EventHandler(this.lstLogList_SelectedIndexChanged);
+            // 
             // panel1
             // 
             this.panel1.AutoSize = true;
@@ -143,17 +142,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(182, 0);
             this.panel1.TabIndex = 4;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label2.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label2.Location = new System.Drawing.Point(5, 5);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(87, 13);
-            this.label2.TabIndex = 10;
-            this.label2.Text = "Selected log Info";
             // 
             // lstLogImportance
             // 
@@ -199,17 +187,29 @@
             this.txtSelectedLogInfo.Size = new System.Drawing.Size(172, 58);
             this.txtSelectedLogInfo.TabIndex = 11;
             // 
-            // lstLogList
+            // label2
             // 
-            this.lstLogList.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lstLogList.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lstLogList.ForeColor = System.Drawing.SystemColors.Menu;
-            this.lstLogList.FormattingEnabled = true;
-            this.lstLogList.Location = new System.Drawing.Point(0, 0);
-            this.lstLogList.Name = "lstLogList";
-            this.lstLogList.Size = new System.Drawing.Size(182, 155);
-            this.lstLogList.TabIndex = 10;
-            this.lstLogList.SelectedIndexChanged += new System.EventHandler(this.lstLogList_SelectedIndexChanged);
+            this.label2.AutoSize = true;
+            this.label2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label2.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label2.Location = new System.Drawing.Point(5, 5);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(87, 13);
+            this.label2.TabIndex = 10;
+            this.label2.Text = "Selected log Info";
+            // 
+            // btnValidate
+            // 
+            this.btnValidate.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnValidate.Location = new System.Drawing.Point(15, 67);
+            this.btnValidate.Margin = new System.Windows.Forms.Padding(15);
+            this.btnValidate.Name = "btnValidate";
+            this.btnValidate.Padding = new System.Windows.Forms.Padding(15);
+            this.btnValidate.Size = new System.Drawing.Size(182, 52);
+            this.btnValidate.TabIndex = 2;
+            this.btnValidate.Text = "Validate";
+            this.btnValidate.UseVisualStyleBackColor = true;
+            this.btnValidate.Click += new System.EventHandler(this.btnValidate_Click);
             // 
             // Form1
             // 

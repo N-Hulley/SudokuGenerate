@@ -28,7 +28,7 @@ namespace SudokuInterface
             btnGenerate.Enabled = false;
             if (Display != null) Display.Dispose();
             Display = null;
-            Sudoku board = Sudoku.GenerateRandom();
+            Sudoku board = Sudoku.GenerateRandomValidSudoku();
             Display = new SudokuDisplay(board);
             Display.Dock = DockStyle.Fill;
             pnlSudokuPlaceHoldr.Controls.Add(Display);
